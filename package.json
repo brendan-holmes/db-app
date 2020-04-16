@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "dev-server": "nodemon --exec babel-node src/index.js --ignore dist/",
+    "dev-server": "nodemon --exec babel-node server.js --ignore dist/",
     "dev-bundle": "webpack -w -d",
     "build": "webpack --mode production"
   },
