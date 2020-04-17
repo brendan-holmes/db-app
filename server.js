@@ -1,10 +1,17 @@
-import express from 'express'
-import bodyParser from 'body-parser'
-import cors from 'cors'
-import path from 'path'
+const express = require( 'express')
+const bodyParser = require( 'body-parser')
+const cors = require( 'cors')
+const path = require( 'path')
+const mongoose = require('mongoose')
 
-import movieDb from './db'
-import { movieRouter } from './routes/movie-router'
+const routes = require( './routes/movie-router')
+
+// Connect to Mongo Database
+mongoose
+  .connect('mongodb://127.0.0.1:27017/cinema', { useNewUrlParser: true,  useUnifiedTopology: true})
+  .catch(e => {
+        console.error('Connection error', e.message)
+    })
 
 // Set the port to listen to api requests
 const port = process.env.NODE_ENV || 5000
@@ -33,10 +40,10 @@ else {
 }
 
 // Subscribe to database events
-movieDb.on('error', console.error.bind(console, 'MongoDB connection error:'))
+mongoose.connection.on('error', console.error.bind(console, 'MongoDB connection error:'))
 
 // Server api requests
-server.use('/api', movieRouter)
+server.use('/api', routes.movieRouter)
 
 // subscribe to requests at the specified reports and serve responses
 // Note: since this is server-side code, this console.log prints to the command 

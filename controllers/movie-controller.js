@@ -1,4 +1,4 @@
-import Movie from '../models/movie-model'
+const movieModel = require('../models/movie-model')
 
 const createMovie = (req, res) => {
     // Use body-parser to parse the JSON request body element
@@ -11,7 +11,7 @@ const createMovie = (req, res) => {
         })
     }
 
-    const movie = new Movie(body)
+    const movie = new movieModel.model(body)
 
     if (!movie) {
         return res.status(400).json({ success: false, error: 'Body has no movie or incorrect schema.' })
@@ -117,10 +117,8 @@ const getMovies = async (req, res) => {
     }).catch(err => console.log(err))
 }
 
-export {
-    createMovie,
-    updateMovie,
-    deleteMovie,
-    getMovies,
-    getMovieById,
-}
+exports.createMovie = createMovie
+exports.updateMovie = updateMovie
+exports.deleteMovie = deleteMovie
+exports.getMovies = getMovies
+exports.getMovieById = getMovieById

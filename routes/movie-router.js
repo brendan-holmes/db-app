@@ -1,13 +1,13 @@
-import { Router } from 'express'
+const express = require('express')
 
-import { createMovie, updateMovie, deleteMovie, getMovieById, getMovies } from '../controllers/movie-controller'
+const movieController = require('../controllers/movie-controller')
 
-const movieRouter = Router()
+const movieRouter = express.Router()
 
-movieRouter.post('/movie', createMovie)
-movieRouter.put('/movie/:id', updateMovie)
-movieRouter.delete('/movie/:id', deleteMovie)
-movieRouter.get('/movie/:id', getMovieById)
-movieRouter.get('/movies', getMovies)
+movieRouter.post('/movie', movieController.createMovie)
+movieRouter.put('/movie/:id', movieController.updateMovie)
+movieRouter.delete('/movie/:id', movieController.deleteMovie)
+movieRouter.get('/movie/:id', movieController.getMovieById)
+movieRouter.get('/movies', movieController.getMovies)
 
-export { movieRouter }
+exports.movieRouter = movieRouter

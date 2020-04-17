@@ -1,6 +1,6 @@
-import { Schema, model as mongooseModel} from 'mongoose'
+const mongoose = require('mongoose')
 
-const Movie = new Schema(
+const Movie = new mongoose.Schema(
     {
         name: { type: String, required: true },
         time: { type: [String], required: true },
@@ -17,4 +17,5 @@ which might create some ambiguity between the
 Mongoose Movie object and the local Movie variable
 in this file.
 */
-export default mongooseModel('movies', Movie)
+
+exports.model = mongoose.model('movies', Movie)
