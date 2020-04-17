@@ -1,0 +1,18 @@
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
+
+// Create Schema
+const ItemSchema = new Schema({
+    name: {
+        type: String,
+        required: true,
+    },
+    date: {
+        type: Date,
+        default: Date.now
+    }
+});
+
+// eslint-disable-next-line no-undef
+const Item = mongoose.model('item', ItemSchema)
+module.exports = Item

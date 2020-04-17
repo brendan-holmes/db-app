@@ -1,9 +1,9 @@
 import axios from 'axios'
 
-const backEndPortNum = 4242
+const backEndPortNum = process.env.NODE_ENV || 5000
 
 const api = axios.create({
-    baseURL: `http://localhost:${backEndPortNum}/api`,
+    baseURL: `http://localhost:${backEndPortNum}/api/movies`,
 })
 
 export const insertMovie = payload => api.post(`/movie`, payload)

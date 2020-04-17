@@ -11,7 +11,7 @@ const createMovie = (req, res) => {
         })
     }
 
-    const movie = new movieModel.model(body)
+    const movie = new movieModel.Movie(body)
 
     if (!movie) {
         return res.status(400).json({ success: false, error: 'Body has no movie or incorrect schema.' })
@@ -44,7 +44,7 @@ const updateMovie = async (req, res) => {
         })
     }
 
-    Movie.findOne({ _id: req.params.id }, (err, movie) => {
+    movieModel.Movie.findOne({ _id: req.params.id }, (err, movie) => {
         if (err) {
             return res.status(404).json({
                 err,
@@ -73,7 +73,7 @@ const updateMovie = async (req, res) => {
 }
 
 const deleteMovie = async (req, res) => {
-    await Movie.findOneAndDelete({ _id: req.params.id }, (err, movie) => {
+    await movieModel.Movie.findOneAndDelete({ _id: req.params.id }, (err, movie) => {
         if (err) {
             return res.status(400).json({ success: false, error: err })
         }
@@ -89,7 +89,7 @@ const deleteMovie = async (req, res) => {
 }
 
 const getMovieById = async (req, res) => {
-    await Movie.findOne({ _id: req.params.id }, (err, movie) => {
+    await movieModel.Movie.findOne({ _id: req.params.id }, (err, movie) => {
         if (err) {
             return res.status(400).json({ success: false, error: err })
         }
@@ -104,7 +104,7 @@ const getMovieById = async (req, res) => {
 }
 
 const getMovies = async (req, res) => {
-    await Movie.find({}, (err, movies) => {
+    await movieModel.Movie.find({}, (err, movies) => {
         if (err) {
             return res.status(400).json({ success: false, error: err })
         }
