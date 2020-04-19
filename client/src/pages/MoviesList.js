@@ -63,12 +63,14 @@ class MoviesList extends Component {
     componentDidMount = async () => {
         this.setState({ isLoading: true })
 
-        await api.getAllMovies().then(movies => {
-            this.setState({
-                movies: movies.data.data,
-                isLoading: false,
+        await api.getAllMovies()
+            .then(movies => {
+                this.setState({
+                    movies: movies.data.data,
+                    isLoading: false,
+                })
             })
-        })
+            .catch((err) => {console.log(err)})
     }
 
     render() {

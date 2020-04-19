@@ -4,8 +4,8 @@ const cors = require( 'cors')
 const path = require( 'path')
 const mongoose = require('mongoose')
 
-const movies = require( './routes/movie-router')
-const items = require('./routes/api/items')
+const movies = require( './routes/api/movie-router')
+//const items = require('./routes/api/items')
 
 const app = express()
 
@@ -26,11 +26,11 @@ mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.connection.on('error', console.error.bind(console, 'MongoDB connection error:'))
 
 // Use routes
-app.use('/api', movies.router)
-app.use('/api/items', items.router)
+app.use('/api/movies', movies.router)
+//app.use('/api/items', items.router)
 
 // Set the server port
-const port = process.env.NODE_ENV || 5000
+const port = process.env.PORT || 5000
 
 app.listen(port, () => console.log(`Server started on port ${port}.`))
 
@@ -45,6 +45,6 @@ if (process.env.NODE_ENV === 'production') {
 else {
   // else (i.e. in dev mode, serve some placeholder text)
   app.get('/', (req, res) => {
-    res.send('Server running in dev mode...')
+    res.send('Server running in dev mode. Start client using \'npm run dev-client\'...')
   });
 }

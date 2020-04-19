@@ -1,9 +1,16 @@
 import axios from 'axios'
 
-const backEndPortNum = process.env.NODE_ENV || 5000
+// Use Heroku assigned backend port number or
+// manually assigned port if not defined
+var backEndPortNum = process.env.PORT || 5000
+console.log(`Using back-end port ${backEndPortNum}`)
+
+
+const apiBaseURL = `http://localhost:${backEndPortNum}/api/movies`
+console.log(`API Base URL: ${apiBaseURL}`)
 
 const api = axios.create({
-    baseURL: `http://localhost:${backEndPortNum}/api/movies`,
+    baseURL: apiBaseURL,
 })
 
 export const insertMovie = payload => api.post(`/movie`, payload)
